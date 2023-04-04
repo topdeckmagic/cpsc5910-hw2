@@ -51,9 +51,9 @@
 
 ## Grant The Service Principles Access To The Resource Groups
 
-```az role assignment create --assignee fb3876a4-7201-4bf3-a9ff-5e4c53f99ae3 --role contributor --resource-group HW2Dev```
+```az role assignment create --assignee fb3876a4-7201-4bf3-a9ff-5e4c53f99ae3 --role owner --resource-group HW2Dev```
 
-```az role assignment create --assignee 5d004dd7-6784-46c8-a669-0b48a70c2764 --role contributor --resource-group HW2Prod```
+```az role assignment create --assignee 5d004dd7-6784-46c8-a669-0b48a70c2764 --role owner --resource-group HW2Prod```
 
 ```az role assignment create --assignee 5d004dd7-6784-46c8-a669-0b48a70c2764 --role reader --resource-group HW2Dev```
 
@@ -63,11 +63,11 @@
 
 ## Have An Application To Play With
 
-To make the demonstration of permissions more interesting let's deploy a real application that we are all familiar with... Hello world! To do this we will use a Bicep deployment that uses a declarative approach to create the whole application in a single deployment based off of this walkthrough of manual configuration.
+To make the demonstration of permissions more interesting let's deploy a real application that we are all familiar with... Hello world! To do this we will use a ARM deployment that creates the whole application in a single deployment based off of this walkthrough of manual configuration.
 
 <https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart-portal>
 
-I've included the ARM template as well as the decompiled bicep files for both dev and prod deployments.
+I've included the ARM template as deploy_dev.json and deploy_prod.json respectively.
 
 ## Logout Of Your Own Account
 
