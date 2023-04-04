@@ -63,9 +63,11 @@
 
 ## Have An Application To Play With
 
-To make the demonstration of permissions more interesting let's deploy a real application that we are all familiar with... Hello world! To do this we will use a Bicep deployment that uses a declarative approach to create the whole application in a single deployment.
+To make the demonstration of permissions more interesting let's deploy a real application that we are all familiar with... Hello world! To do this we will use a Bicep deployment that uses a declarative approach to create the whole application in a single deployment based off of this walkthrough of manual configuration.
 
-<https://learn.microsoft.com/en-us/azure/app-service/provision-resource-bicep>
+<https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart-portal>
+
+I've included the ARM template as well as the decompiled bicep files for both dev and prod deployments.
 
 ## Logout Of Your Own Account
 
@@ -77,8 +79,8 @@ To make the demonstration of permissions more interesting let's deploy a real ap
 
 | Expected Result    | Scenario |
 |--------------------|----------|
-| :heavy_check_mark: | ```az deployment group create --resource-group HW2Dev --template-file .\main.bicep```|
-| :x:                | ```az deployment group create --resource-group HW2Prod --template-file .\main.bicep```|
+| :heavy_check_mark: | ```az deployment group create --resource-group HW2Dev --template-file dev.bicep```|
+| :x:                | ```az deployment group create --resource-group HW2Prod --template-file prod.bicep```|
 | :heavy_check_mark: | ```az group show --name HW2Dev```|
 | :x:                | ```az group show --name HW2Prod```|
 
@@ -88,8 +90,8 @@ To make the demonstration of permissions more interesting let's deploy a real ap
 
 | Expected Result    | Scenario |
 |--------------------|----------|
-| :x:                | ```az deployment group create --resource-group HW2Dev --template-file .\main.bicep```|
-| :heavy_check_mark: | ```az deployment group create --resource-group HW2Prod --template-file .\main.bicep```|
+| :x:                | ```az deployment group create --resource-group HW2Dev --template-file dev.bicep```|
+| :heavy_check_mark: | ```az deployment group create --resource-group HW2Prod --template-file prod.bicep```|
 | :heavy_check_mark: | ```az group show --name HW2Dev```|
 | :heavy_check_mark: | ```az group show --name HW2Prod```|
 
@@ -99,7 +101,7 @@ To make the demonstration of permissions more interesting let's deploy a real ap
 
 | Expected Result    | Scenario |
 |--------------------|----------|
-| :x:                | ```az deployment group create --resource-group HW2Dev --template-file .\main.bicep```|
-| :x:                | ```az deployment group create --resource-group HW2Prod --template-file .\main.bicep```|
+| :x:                | ```az deployment group create --resource-group HW2Dev --template-file dev.bicep```|
+| :x:                | ```az deployment group create --resource-group HW2Prod --template-file prod.bicep```|
 | :heavy_check_mark: | ```az group show --name HW2Dev```|
 | :heavy_check_mark: | ```az group show --name HW2Prod```|
