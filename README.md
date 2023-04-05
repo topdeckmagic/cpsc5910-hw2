@@ -8,6 +8,8 @@ This walkthrough assumes that you have an Azure Subscription that is enabled for
 
 In this walkthrough we will create two resource groups, one for development and one for production. We will then create three service principles, one for each of the roles that we will be using in this walkthrough. We will then grant the service principles access to the resource groups. Finally we will use the service principles to exercise the permissions that we have granted them.
 
+As a first step, search and replace all instances of ```<YOUR INITIALS>``` in the code base and put in your intitials, this should help avoid name collisions.
+
 ## Login To Azure CLI
 
 ```az login```
@@ -24,12 +26,14 @@ In this walkthrough we will create two resource groups, one for development and 
 
 ```json
 {
-  "appId": <SP ID>,
+  "appId": <DEV SP ID>,
   "displayName": "cpsc5910-<YOUR INITIALS>-dev",
-  "password": <SP Password>,
+  "password": <DEV SP Password>,
   "tenant": "bc10e052-b01c-4849-9967-ee7ec74fc9d8"
 }
 ```
+
+Save the output from this command into a file called .passwords (which is ignored already via .gitignore).
 
 ## Create The SRE Service Principle
 
@@ -37,12 +41,14 @@ In this walkthrough we will create two resource groups, one for development and 
 
 ```json
 {
-  "appId": <SP ID>,
+  "appId": <SRE SP ID>,
   "displayName": "cpsc5910-<YOUR INITIALS>-sre",
-  "password": <SP Password>,
+  "password": <SRE SP Password>,
   "tenant": "bc10e052-b01c-4849-9967-ee7ec74fc9d8"
 }
 ```
+
+Save the output from this command into a file called .passwords (which is ignored already via .gitignore).
 
 ## Create The SecOps Service Principle
 
@@ -50,12 +56,14 @@ In this walkthrough we will create two resource groups, one for development and 
 
 ```json
 {
-  "appId": <SP ID>,
+  "appId": <SECOPS SP ID>,
   "displayName": "cpsc5910-<YOUR INITIALS>-secops",
-  "password": <SP Password>,
+  "password": <SECOPS SP Password>,
   "tenant": "bc10e052-b01c-4849-9967-ee7ec74fc9d8"
 }
 ```
+
+Save the output from this command into a file called .passwords (which is ignored already via .gitignore).
 
 ## Grant The Service Principles Access To The Resource Groups
 
@@ -75,7 +83,7 @@ To make the demonstration of permissions more interesting let's deploy a real ap
 
 <https://learn.microsoft.com/en-us/azure/container-instances/container-instances-quickstart-portal>
 
-I've included the ARM template as deploy_dev.json and deploy_prod.json respectively.
+I've included the ARM template as deploy_dev.json and deploy_prod.json respectively.  You can see if your deployments worked or not fully by looking at the ACI instance to find the FQDN and test it out!
 
 ## Logout Of Your Own Account
 
@@ -105,7 +113,7 @@ I've included the ARM template as deploy_dev.json and deploy_prod.json respectiv
 
 ## Login As SecOps and Exercise Permissions
 
-```az login --service-principal -u <SRE SP ID> -p <SRE SP Password> --tenant bc10e052-b01c-4849-9967-ee7ec74fc9d8```
+```az login --service-principal -u <SECOPS SP ID> -p <SECOPS SP Password> --tenant bc10e052-b01c-4849-9967-ee7ec74fc9d8```
 
 | Expected Result    | Scenario |
 |--------------------|----------|
@@ -120,3 +128,6 @@ I've included the ARM template as deploy_dev.json and deploy_prod.json respectiv
 ```az login```
 ```az group delete --resource-group HW2Dev```
 ```az group delete --resourec-group HW2Prod```
+```az ad sp delete --id <DEV SP ID>```
+```az ad sp delete --id <SRE SP ID>```
+```az ad sp delete --id <SECOPS SP ID>```
