@@ -79,14 +79,14 @@ I've included the ARM template as deploy_dev.json and deploy_prod.json respectiv
 
 | Expected Result    | Scenario |
 |--------------------|----------|
-| :heavy_check_mark: | ```az deployment group create --resource-group HW2Dev --template-file dev.bicep```|
-| :x:                | ```az deployment group create --resource-group HW2Prod --template-file prod.bicep```|
+| :heavy_check_mark: | ```az deployment group create --resource-group HW2Dev --template-file deploy_dev.json```|
+| :x:                | ```az deployment group create --resource-group HW2Prod --template-file deploy_prod.json```|
 | :heavy_check_mark: | ```az group show --name HW2Dev```|
 | :x:                | ```az group show --name HW2Prod```|
 
 ## Login As SRE and Exercise Permissions
 
-```az login --service-principal -u fb3876a4-7201-4bf3-a9ff-5e4c53f99ae3 -p <SP Password> --tenant bc10e052-b01c-4849-9967-ee7ec74fc9d8```
+```az login --service-principal -u 5d004dd7-6784-46c8-a669-0b48a70c2764 -p <SP Password> --tenant bc10e052-b01c-4849-9967-ee7ec74fc9d8```
 
 | Expected Result    | Scenario |
 |--------------------|----------|
@@ -97,7 +97,7 @@ I've included the ARM template as deploy_dev.json and deploy_prod.json respectiv
 
 ## Login As SecOps and Exercise Permissions
 
-```az login --service-principal -u fb3876a4-7201-4bf3-a9ff-5e4c53f99ae3 -p <SP Password> --tenant bc10e052-b01c-4849-9967-ee7ec74fc9d8```
+```az login --service-principal -u 5bf7c882-0048-4885-ba62-ddbc167bebc1 -p <SP Password> --tenant bc10e052-b01c-4849-9967-ee7ec74fc9d8```
 
 | Expected Result    | Scenario |
 |--------------------|----------|
@@ -105,3 +105,10 @@ I've included the ARM template as deploy_dev.json and deploy_prod.json respectiv
 | :x:                | ```az deployment group create --resource-group HW2Prod --template-file prod.bicep```|
 | :heavy_check_mark: | ```az group show --name HW2Dev```|
 | :heavy_check_mark: | ```az group show --name HW2Prod```|
+
+## Clean Up Resources
+
+```az logout```
+```az login```
+```az group delete --resource-group HW2Dev```
+```az group delete --resourec-group HW2Prod```
