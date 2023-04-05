@@ -1,5 +1,13 @@
 # CPSC5910 HW2 - Azure RBAC - Colin Aylawrd
 
+## Pre-Requisites
+
+This walkthrough assumes that you have an Azure Subscription that is enabled for pay-as-you-go.  I recommend that you sign up for a student account and then update the subscription to pay-as-you-go. This ensures that you will not be charged for any resources that you create as Microsoft gives students several free tiers and $100/year of credit for anything else.
+
+## Overview of the Walkthrough
+
+In this walkthrough we will create two resource groups, one for development and one for production. We will then create three service principles, one for each of the roles that we will be using in this walkthrough. We will then grant the service principles access to the resource groups. Finally we will use the service principles to exercise the permissions that we have granted them.
+
 ## Login To Azure CLI
 
 ```az login```
@@ -12,12 +20,12 @@
 
 ## Create The Dev Service Principle
 
-```az ad sp create-for-rbac --name cpsc5910-cpa-dev```
+```az ad sp create-for-rbac --name cpsc5910-<YOUR INITIALS>-dev```
 
 ```json
 {
-  "appId": "fb3876a4-7201-4bf3-a9ff-5e4c53f99ae3",
-  "displayName": "cpsc5910-cpa-dev",
+  "appId": <SP ID>,
+  "displayName": "cpsc5910-<YOUR INITIALS>-dev",
   "password": <SP Password>,
   "tenant": "bc10e052-b01c-4849-9967-ee7ec74fc9d8"
 }
@@ -25,12 +33,12 @@
 
 ## Create The SRE Service Principle
 
-```az ad sp create-for-rbac --name cpsc5910-cpa-sre```
+```az ad sp create-for-rbac --name cpsc5910-<YOUR INITIALS>-sre```
 
 ```json
 {
-  "appId": "5d004dd7-6784-46c8-a669-0b48a70c2764",
-  "displayName": "cpsc5910-cpa-sre",
+  "appId": <SP ID>,
+  "displayName": "cpsc5910-<YOUR INITIALS>-sre",
   "password": <SP Password>,
   "tenant": "bc10e052-b01c-4849-9967-ee7ec74fc9d8"
 }
@@ -38,12 +46,12 @@
 
 ## Create The SecOps Service Principle
 
-```az ad sp create-for-rbac --name cpsc5910-cpa-secops```
+```az ad sp create-for-rbac --name cpsc5910-<YOUR INITIALS>-secops```
 
 ```json
 {
-  "appId": "5bf7c882-0048-4885-ba62-ddbc167bebc1",
-  "displayName": "cpsc5910-cpa-secops",
+  "appId": <SP ID>,
+  "displayName": "cpsc5910-<YOUR INITIALS>-secops",
   "password": <SP Password>,
   "tenant": "bc10e052-b01c-4849-9967-ee7ec74fc9d8"
 }
@@ -51,15 +59,15 @@
 
 ## Grant The Service Principles Access To The Resource Groups
 
-```az role assignment create --assignee fb3876a4-7201-4bf3-a9ff-5e4c53f99ae3 --role owner --resource-group HW2Dev```
+```az role assignment create --assignee <DEV SP ID> --role owner --resource-group HW2Dev```
 
-```az role assignment create --assignee 5d004dd7-6784-46c8-a669-0b48a70c2764 --role owner --resource-group HW2Prod```
+```az role assignment create --assignee <SRE SP ID> --role owner --resource-group HW2Prod```
 
-```az role assignment create --assignee 5d004dd7-6784-46c8-a669-0b48a70c2764 --role reader --resource-group HW2Dev```
+```az role assignment create --assignee <SRE SP ID> --role reader --resource-group HW2Dev```
 
-```az role assignment create --assignee 5bf7c882-0048-4885-ba62-ddbc167bebc1 --role reader --resource-group HW2Dev```
+```az role assignment create --assignee <SECOPS SP ID> --role reader --resource-group HW2Dev```
 
-```az role assignment create --assignee 5bf7c882-0048-4885-ba62-ddbc167bebc1 --role reader --resource-group HW2Prod```
+```az role assignment create --assignee <SECOPS SP ID> --role reader --resource-group HW2Prod```
 
 ## Have An Application To Play With
 
@@ -75,7 +83,7 @@ I've included the ARM template as deploy_dev.json and deploy_prod.json respectiv
 
 ## Login As Dev and Exercise Permissions
 
-```az login --service-principal -u fb3876a4-7201-4bf3-a9ff-5e4c53f99ae3 -p <SP Password> --tenant bc10e052-b01c-4849-9967-ee7ec74fc9d8```
+```az login --service-principal -u <DEV SP ID> -p <DEV SP Password> --tenant bc10e052-b01c-4849-9967-ee7ec74fc9d8```
 
 | Expected Result    | Scenario |
 |--------------------|----------|
@@ -86,7 +94,7 @@ I've included the ARM template as deploy_dev.json and deploy_prod.json respectiv
 
 ## Login As SRE and Exercise Permissions
 
-```az login --service-principal -u 5d004dd7-6784-46c8-a669-0b48a70c2764 -p <SP Password> --tenant bc10e052-b01c-4849-9967-ee7ec74fc9d8```
+```az login --service-principal -u <SRE SP ID> -p <SRE SP Password> --tenant bc10e052-b01c-4849-9967-ee7ec74fc9d8```
 
 | Expected Result    | Scenario |
 |--------------------|----------|
@@ -97,7 +105,7 @@ I've included the ARM template as deploy_dev.json and deploy_prod.json respectiv
 
 ## Login As SecOps and Exercise Permissions
 
-```az login --service-principal -u 5bf7c882-0048-4885-ba62-ddbc167bebc1 -p <SP Password> --tenant bc10e052-b01c-4849-9967-ee7ec74fc9d8```
+```az login --service-principal -u <SRE SP ID> -p <SRE SP Password> --tenant bc10e052-b01c-4849-9967-ee7ec74fc9d8```
 
 | Expected Result    | Scenario |
 |--------------------|----------|
