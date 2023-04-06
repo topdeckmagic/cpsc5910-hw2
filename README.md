@@ -128,9 +128,15 @@ I've included the ARM template as deploy_dev.json and deploy_prod.json respectiv
 ## Clean Up Resources
 
 ```az logout```
+
 ```az login```
+
 ```az group delete --resource-group HW2Dev```
+
 ```az group delete --resourec-group HW2Prod```
+
 ```az ad sp delete --id <DEV SP ID>```
+
 ```az ad sp delete --id <SRE SP ID>```
+
 ```az ad sp delete --id <SECOPS SP ID>```
