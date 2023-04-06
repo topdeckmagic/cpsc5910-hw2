@@ -20,9 +20,14 @@ As a first step, search and replace all instances of ```<YOUR INITIALS>``` in th
 
 ```az group create --name HW2Prod --location eastus```
 
-## Create The Dev Service Principle
+## Create The Service Principles
 
+For simplicity we will be creating Service Principles for each of the types of identities that we want to demonstrate.  Service Principles can be made with several forms of auth, to keep things easy we are using password auth.  Please don't ever do this on a real implementation.
+
+Run:
 ```az ad sp create-for-rbac --name cpsc5910-<YOUR INITIALS>-dev```
+
+Expected Output:
 
 ```json
 {
@@ -33,11 +38,10 @@ As a first step, search and replace all instances of ```<YOUR INITIALS>``` in th
 }
 ```
 
-Save the output from this command into a file called .passwords (which is ignored already via .gitignore).
-
-## Create The SRE Service Principle
-
+Run:
 ```az ad sp create-for-rbac --name cpsc5910-<YOUR INITIALS>-sre```
+
+Expected Output:
 
 ```json
 {
@@ -48,11 +52,10 @@ Save the output from this command into a file called .passwords (which is ignore
 }
 ```
 
-Save the output from this command into a file called .passwords (which is ignored already via .gitignore).
-
-## Create The SecOps Service Principle
-
+Run:
 ```az ad sp create-for-rbac --name cpsc5910-<YOUR INITIALS>-secops```
+
+Expected Output:
 
 ```json
 {
@@ -63,7 +66,7 @@ Save the output from this command into a file called .passwords (which is ignore
 }
 ```
 
-Save the output from this command into a file called .passwords (which is ignored already via .gitignore).
+:emphasis: Save the output from all three of these commands into a file called .passwords (which is ignored already via .gitignore).  You will need to refer to the SP ID's and Passwords in subsequent steps.
 
 ## Grant The Service Principles Access To The Resource Groups
 
