@@ -66,7 +66,7 @@ Expected Output:
 }
 ```
 
-:emphasis: Save the output from all three of these commands into a file called .passwords (which is ignored already via .gitignore).  You will need to refer to the SP ID's and Passwords in subsequent steps.
+:exclamation: Save the output from all three of these commands into a file called .passwords (which is ignored already via .gitignore).  You will need to refer to the SP ID's and Passwords in subsequent steps.
 
 ## Grant The Service Principles Access To The Resource Groups
 
